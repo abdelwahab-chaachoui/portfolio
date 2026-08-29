@@ -17,7 +17,6 @@ class Post(models.Model):
         return self.title
 
 
-
 # Model for the different keywords in the system
 # might change, that's why i went with a DB table instead of static
 class Keyword(models.Model):

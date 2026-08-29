@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ('blogs', '0001_initial'),
     ]
 
     operations = [
@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='keywords',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='keywords', to='blog.keyword'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='keywords', to='blogs.keyword'),
         ),
     ]
