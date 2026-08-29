@@ -1,0 +1,5 @@
+
+
+STATUS = ("created", "draft", "published")
+
+

@@ -1,12 +1,16 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Keyword
 
 # Register your models here.
-
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'date', 'status')
-    list_filter = ('status',)
-    search_fields = ('title', 'body')
+    list_filter = ('status', 'keywords')
+    search_fields = ('title', 'status')
 
-admin.site.register(Post)
 
+class KeywordAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    list_filter = ('title',)
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Keyword, KeywordAdmin)
