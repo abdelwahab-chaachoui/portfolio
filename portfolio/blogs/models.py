@@ -2,17 +2,13 @@ from django.db import models
 from django.db.models.fields.related import ForeignKey
 import uuid
 
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    date = models.DateField(auto_now_add=True)
-    tags = models.CharField(max_length=200)
-    author = models.CharField(max_length=200)
-    status = models.BooleanField(default=True) # published or not
-    keywords = ForeignKey('Keyword', related_name='keywords', on_delete=models.DO_NOTHING)
+from django.utils import choices
 
-    def __str__(self):
-        return self.title
+STATUS = (
+    (0,"Created"),
+    (1, "Draft"),
+    (2, "Published")
+)
 
 
 """ 
@@ -21,6 +17,26 @@ might change, that's why i went with a DB table instead of static
 """
 class Keyword(models.Model):
     title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    tags = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    status = models.IntegerField(choices=STATUS, default=0) # published or not
+    keywords = ForeignKey(Keyword, related_name='keywords', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        """
+        when retrieving Posts - order the results by descending order
+        this way we can print the latest ones at first
+        """
+        ordering = ['-date']
 
     def __str__(self):
         return self.title
@@ -38,6 +54,15 @@ class Comment(models.Model):
     author = models.CharField(max_length=200)
     content = models.TextField()
     date = models.DateField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+    email = models.EmailField(max_length=200, default='test@test.com')
+
+    class Meta:
+        """
+        when retrieving Comments - order the results by descending order
+        this way we can print the latest ones at first
+        """
+        ordering = ['date']
 
     def __str__(self):
         return str(self.id)

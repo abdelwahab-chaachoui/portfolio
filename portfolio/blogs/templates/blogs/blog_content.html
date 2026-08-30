@@ -14,11 +14,40 @@
                     {{ blog.date }} by {{ blog.author }}
                     <p>{{ blog.content }}</p>
                     <hr>
+                    <div class="card-body">
+                        {% if new_comment %}
+                        <div class="alert alert-success" role="alert">
+                          Your comment is awaiting moderation
+                        </div>
+                        {% else %}
+                        <h3>Leave a comment</h3>
+                        <form method="post" style="margin-top: 1.3em;">
+                          {{ comment_form.as_p }}
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                        </form>
+                        {% endif %}
+                     </div>
+                    <h3>Comments</h3>
+                     {% for comment in comments %}
+                        <div class="comments" style="padding: 10px;">
+                         <p class="font-weight-bold">
+                           {{ comment.author }} wrote on
+                           <span class=" text-muted font-weight-normal">
+                             {{ comment.date }}
+                            </span>
+                          </p>
+                          {{ comment.content | linebreaks }}
+                        </div>
+                     {% endfor %}
+
+
                 </div>
                 <div class="col-md-4" style="background-color: bisque">
                     TESTT
                 </div>
             </div>
+
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </body>
