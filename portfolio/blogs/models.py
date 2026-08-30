@@ -10,7 +10,6 @@ STATUS = (
     (2, "Published")
 )
 
-
 """ 
 Model for the different keywords in the system
 might change, that's why i went with a DB table instead of static
@@ -20,7 +19,6 @@ class Keyword(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -62,7 +60,7 @@ class Comment(models.Model):
         when retrieving Comments - order the results by descending order
         this way we can print the latest ones at first
         """
-        ordering = ['date']
+        ordering = ['-date']
 
     def __str__(self):
         return str(self.id)
