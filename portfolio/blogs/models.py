@@ -39,7 +39,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
 """
 Model describing all the Comments of a Post
 A Post can have 0..n Comments

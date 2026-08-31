@@ -1,10 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-
 from .forms import CommentForm
-from .models import Post, Comment
+from .models import Post
 
-# Create your views here.
 def index(request):
     blogs = Post.objects.filter(status=2).order_by("-date")
     context = {"blogs": blogs}
@@ -29,3 +27,7 @@ def blog_content(request, id):
                                                                             "new_comment": new_comment,
                                                                             "comments": comments,
                                                                             })
+
+def _format_tags(tags_as_str):
+    tags_list = tags_as_str.split(' ')
+    return set(tags_list)
