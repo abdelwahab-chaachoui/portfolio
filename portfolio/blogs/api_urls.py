@@ -4,7 +4,6 @@ from .viewset import PostViewSet, KeywordViewSet  # , CommentForPostViewSet
 
 router = routers.DefaultRouter()
 router.register(r'posts', PostViewSet)
-#router.register(r'comments', CommentViewSet)
 
 router.register(r'keywords', KeywordViewSet)
 
