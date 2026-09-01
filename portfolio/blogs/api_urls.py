@@ -1,10 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
-from .viewset import PostViewSet, CommentViewSet, KeywordViewSet  # , CommentForPostViewSet
+from .viewset import PostViewSet, KeywordViewSet  # , CommentForPostViewSet
 
 router = routers.DefaultRouter()
 router.register(r'posts', PostViewSet)
-router.register(r'comments', CommentViewSet)
+#router.register(r'comments', CommentViewSet)
 
 router.register(r'keywords', KeywordViewSet)
 
