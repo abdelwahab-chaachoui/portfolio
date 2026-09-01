@@ -1,8 +1,6 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 import uuid
-
-from django.utils import choices
 from django.utils.safestring import mark_safe
 
 STATUS = (
