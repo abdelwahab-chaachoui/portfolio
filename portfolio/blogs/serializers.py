@@ -1,12 +1,19 @@
 from rest_framework import serializers
-from blogs.models import Post, Comment
+from blogs.models import Post, Comment, Keyword
 
-class PostSerializer(serializers.Serializer):
+class KeywordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Keyword
+        fields = '__all__'
+
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title', 'content', 'date', 'tags', 'author', 'status', 'keywords')
+        fields = ('id', 'title', 'content', 'date', 'tags', 'author', 'status', 'keywords')
 
-class CommentSerializer(serializers.Serializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'content', 'date', 'author', 'active', 'email')
+        fields = '__all__'
+
+

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Keyword, Comment
+from .models import Post, Keyword, Comment, Image
 from django.contrib import messages
 from django.utils.translation import ngettext
 
@@ -89,3 +89,9 @@ class CommentAdmin(admin.ModelAdmin):
             % updated,
             messages.SUCCESS,
         )
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'post', 'image_tag')
+    list_filter = ('post',)
+    search_fields = ('id',)

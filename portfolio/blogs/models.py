@@ -3,6 +3,7 @@ from django.db.models.fields.related import ForeignKey
 import uuid
 
 from django.utils import choices
+from django.utils.safestring import mark_safe
 
 STATUS = (
     (0,"Created"),
@@ -27,7 +28,7 @@ class Post(models.Model):
     tags = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     status = models.IntegerField(choices=STATUS, default=0) # published or not
-    keywords = ForeignKey(Keyword, related_name='keywords', on_delete=models.DO_NOTHING)
+    keywords = ForeignKey(Keyword, related_name='post', on_delete=models.DO_NOTHING)
 
     class Meta:
         """
@@ -63,3 +64,22 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class Image(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    taken_at = models.DateField(auto_now_add=False)
+    caption = models.TextField(max_length=200)
+    image = models.ImageField(upload_to='images/', blank=True, width_field='width', height_field='height')
+    height = models.PositiveIntegerField(blank=True, null=True)
+    width = models.PositiveIntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" width="{self.image.width}" height="{self.image.height}"/>')
+        return "No Image"
