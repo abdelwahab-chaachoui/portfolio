@@ -6,7 +6,8 @@ from django.utils.safestring import mark_safe
 STATUS = (
     (0,"Created"),
     (1, "Draft"),
-    (2, "Published")
+    (2, "Published"),
+    (3, "Archived")
 )
 
 """ 
@@ -63,7 +64,9 @@ class Comment(models.Model):
     def __str__(self):
         return str(self.id)
 
+"""
 
+"""
 class Image(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)

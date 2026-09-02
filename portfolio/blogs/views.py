@@ -26,7 +26,3 @@ def blog_content(request, id):
                                                                             "new_comment": new_comment,
                                                                             "comments": comments,
                                                                             })
-
-def _format_tags(tags_as_str):
-    tags_list = tags_as_str.split(' ')
-    return set(tags_list)

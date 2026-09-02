@@ -62,7 +62,6 @@ class PostAdmin(admin.ModelAdmin):
                 messages.WARNING,
             )
 
-
 @admin.register(Keyword)
 class KeywordAdmin(admin.ModelAdmin):
     list_display = ('title',)

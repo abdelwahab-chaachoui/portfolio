@@ -3,7 +3,11 @@ from blogs.serializers import PostSerializer, KeywordSerializer
 from blogs.models import Post, Keyword
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(status=2)
+    serializer_class = PostSerializer
+
+class ArchivedPostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.filter(status=3)
     serializer_class = PostSerializer
 
 class KeywordViewSet(viewsets.ModelViewSet):
